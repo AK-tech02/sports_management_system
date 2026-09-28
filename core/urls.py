@@ -1,0 +1,33 @@
+from django.urls import path
+from . import views as v
+
+urlpatterns = [
+    path('', v.dashboard, name='dashboard'),
+    path('register/', v.register, name='register'),
+    path('players/', v.players, name='players'),
+    path('players/add/', v.player_form, name='player_add'),
+    path('players/<int:pk>/', v.player_detail, name='player'),
+    path('players/<int:pk>/edit/', v.player_form, name='player_edit'),
+    path('teams/', v.teams, name='teams'),
+    path('teams/add/', v.team_form, name='team_add'),
+    path('teams/<int:pk>/', v.team_detail, name='team'),
+    path('teams/<int:pk>/edit/', v.team_form, name='team_edit'),
+    path('tournaments/', v.tournaments, name='tournaments'),
+    path('tournaments/add/', v.tournament_add, name='tournament_add'),
+    path('tournaments/<int:pk>/', v.tournament_detail, name='tournament'),
+    path('tournaments/<int:pk>/next-round/', v.next_round, name='next_round'),
+    path('tournaments/<int:pk>/standings.csv', v.standings_csv, name='standings_csv'),
+    path('matches/<int:pk>/edit/', v.match_edit, name='match_edit'),
+    path('venues/', v.venues, name='venues'),
+    path('venues/add/', v.venue_form, name='venue_add'),
+    path('venues/<int:pk>/edit/', v.venue_form, name='venue_edit'),
+    path('bookings/', v.bookings, name='bookings'),
+    path('bookings/add/', v.booking_add, name='booking_add'),
+    path('rankings/', v.rankings, name='rankings'),
+    path('stats/add/', v.stat_add, name='stat_add'),
+    path('notifications/', v.notifications, name='notifications'),
+    path('notifications/add/', v.notification_add, name='notification_add'),
+    path('reports/', v.reports, name='reports'),
+    path('reports/players.csv', v.players_csv, name='players_csv'),
+    path('delete/<str:kind>/<int:pk>/', v.delete, name='delete'),
+]

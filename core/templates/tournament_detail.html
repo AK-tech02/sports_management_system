@@ -1,0 +1,9 @@
+{% extends 'base.html' %}{% block content %}<div class="top"><h1>{{ t.name }}</h1><div>
+{% if can.reports %}<a class="btn ghost" href="{% url 'standings_csv' t.pk %}">Download standings (CSV)</a>{% endif %}
+{% if can.tournaments and can_next %}<form method="post" action="{% url 'next_round' t.pk %}" style="display:inline">{% csrf_token %}<button class="btn">Generate next round</button></form>{% endif %}</div></div>
+<p class="mu">{{ t.get_format_display }} - starts {{ t.start_date }}</p>
+<div class="card tw"><h2>Fixtures and results</h2><table><tr><th>Round</th><th>Date</th><th>Match</th><th>Venue</th><th>Result</th><th></th></tr>
+{% for m in matches %}<tr><td>{{ m.round_no }}</td><td>{{ m.date }}</td><td>{{ m }}</td><td>{{ m.venue|default:"TBA" }}</td><td>{% if m.played %}<b>{{ m.score_a }} - {{ m.score_b }}</b>{% else %}<span class="mu">Pending</span>{% endif %}</td>
+<td>{% if can.tournaments %}<a href="{% url 'match_edit' m.pk %}">{% if m.played %}Edit{% else %}Record result{% endif %}</a>{% endif %}</td></tr>{% endfor %}</table></div>
+<div class="card tw"><h2>Standings</h2><table><tr><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>For</th><th>Against</th><th>Pts</th></tr>
+{% for s in standings %}<tr><td>{{ s.team }}</td><td>{{ s.p }}</td><td>{{ s.w }}</td><td>{{ s.d }}</td><td>{{ s.l }}</td><td>{{ s.gf }}</td><td>{{ s.ga }}</td><td><b>{{ s.pts }}</b></td></tr>{% endfor %}</table></div>{% endblock %}

@@ -1,0 +1,17 @@
+{% load static %}<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sports Management System</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/app.css' %}"></head><body>
+<div id="app">{% if user.is_authenticated %}<nav><div class="logo">SPORTS<b>MS</b></div>
+{% url 'dashboard' as u1 %}<a href="{{u1}}" {% if request.path == u1 %}class="on"{% endif %}>Dashboard</a>
+<a href="{% url 'players' %}" {% if '/players' in request.path %}class="on"{% endif %}>Players</a>
+<a href="{% url 'teams' %}" {% if '/teams' in request.path %}class="on"{% endif %}>Teams</a>
+<a href="{% url 'tournaments' %}" {% if '/tournaments' in request.path or '/matches' in request.path %}class="on"{% endif %}>Tournaments</a>
+<a href="{% url 'venues' %}" {% if '/venues' in request.path or '/bookings' in request.path %}class="on"{% endif %}>Venues</a>
+<a href="{% url 'rankings' %}" {% if '/rankings' in request.path or '/stats' in request.path %}class="on"{% endif %}>Performance</a>
+<a href="{% url 'notifications' %}" {% if '/notifications' in request.path %}class="on"{% endif %}>Notifications</a>
+{% if can.reports %}<a href="{% url 'reports' %}" {% if '/reports' in request.path %}class="on"{% endif %}>Reports</a>{% endif %}
+<form method="post" action="{% url 'logout' %}">{% csrf_token %}<button>Sign out ({{ user.username }}, {{ role }})</button></form></nav>{% endif %}
+<main {% if not user.is_authenticated %}class="auth"{% endif %}>
+{% for m in messages %}<div class="msg {{ m.tags }}">{{ m }}</div>{% endfor %}
+{% block content %}{% endblock %}</main></div></body></html>

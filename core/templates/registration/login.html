@@ -1,0 +1,3 @@
+{% extends 'base.html' %}{% block content %}<h1>Sports Management System</h1><div class="card"><h2>Sign in</h2>
+<form method="post">{% csrf_token %}{{ form.as_p }}<button class="btn">Sign in</button></form>
+<p class="mu">New here? <a href="{% url 'register' %}">Create an account</a></p></div>{% endblock %}

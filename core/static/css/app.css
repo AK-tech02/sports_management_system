@@ -1,0 +1,30 @@
+:root{--bg:#eef2f6;--cd:#fff;--tx:#0e1b2c;--mu:#5d6b7c;--ac:#e4572e;--bd:#d9e0e8;--nv:#0e1b2c}
+@media(prefers-color-scheme:dark){:root{--bg:#0a121c;--cd:#131f2e;--tx:#e6ecf3;--mu:#8b9bb0;--bd:#24334a;--nv:#060c14}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 Barlow,system-ui,sans-serif}
+h1,h2,h3{font-family:'Barlow Condensed',Impact,sans-serif;margin:0 0 8px}h1{font-size:34px}h2{font-size:22px}
+a{color:var(--ac)}
+#app{display:flex;min-height:100vh}
+nav{width:210px;background:var(--nv);padding:18px 10px;flex-shrink:0}
+nav .logo{font:700 22px 'Barlow Condensed',Impact,sans-serif;padding:0 10px 14px;color:#fff}nav .logo b{color:var(--ac)}
+nav a,nav button{display:block;width:100%;text-align:left;background:none;border:0;color:#dfe7f0;padding:9px 10px;border-radius:6px;font:inherit;text-decoration:none;cursor:pointer}
+nav a:hover,nav button:hover{background:#ffffff14}nav a.on{background:var(--ac);color:#fff}
+main{flex:1;padding:24px;min-width:0;max-width:1100px}main.auth{max-width:440px;margin:6vh auto}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.card{background:var(--cd);border:1px solid var(--bd);border-radius:8px;padding:16px;margin-bottom:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:16px}
+.stat{background:var(--cd);border:1px solid var(--bd);border-left:4px solid var(--ac);padding:12px 14px;border-radius:6px}
+.stat b{display:block;font:700 34px 'Barlow Condensed',Impact,sans-serif}.stat span,.mu{color:var(--mu)}
+.tw{overflow-x:auto}table{width:100%;border-collapse:collapse}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--bd);white-space:nowrap}th{color:var(--mu);font-weight:600}
+td.act a{margin-right:10px}a.danger{color:#c0392b}
+input,select,textarea,.btn{font:inherit;padding:8px 10px;border:1px solid var(--bd);border-radius:6px;background:var(--cd);color:var(--tx)}
+form p{margin:0 0 12px}form p label{display:block;font-weight:600;margin-bottom:3px}form p input:not([type=checkbox]),form p select,form p textarea{width:100%}
+form ul{list-style:none;padding:0;margin:0}.helptext{color:var(--mu);font-size:13px;display:block}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.btn{background:var(--ac);color:#fff;border-color:var(--ac);font-weight:600;cursor:pointer;text-decoration:none;display:inline-block}
+.btn.ghost{background:none;color:var(--tx);border-color:var(--bd)}
+.msg{padding:10px 14px;border-radius:6px;margin-bottom:12px;background:#dff3e8;color:#14532d}.msg.error{background:#fde4e1;color:#8a1c12}
+.errorlist{color:#c0392b;font-weight:600;list-style:none;padding:0;margin:0 0 6px}
+.note{padding:10px 0;border-bottom:1px solid var(--bd)}.note small{color:var(--mu)}
+@media(max-width:760px){#app{flex-direction:column}nav{width:100%;display:flex;overflow-x:auto;padding:8px}nav .logo{padding:6px 10px}nav a,nav button{width:auto;white-space:nowrap}main{padding:14px}}

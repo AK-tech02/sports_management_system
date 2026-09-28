@@ -1,0 +1,11 @@
+{% extends 'base.html' %}{% block content %}<div class="top"><h1>Reports and analytics</h1><a class="btn ghost" href="{% url 'players_csv' %}">Download player stats (CSV)</a></div>
+<div class="card"><h2>Top players by points</h2><canvas id="c1" height="110"></canvas></div>
+<div class="card"><h2>Team totals</h2><canvas id="c2" height="90"></canvas></div>
+<div class="card"><h2>Tournament reports</h2><table>{% for t in tournaments %}<tr><td><a href="{% url 'tournament' t.pk %}">{{ t.name }}</a></td><td><a href="{% url 'standings_csv' t.pk %}">Download standings (CSV)</a></td></tr>{% empty %}<tr><td class="mu">No tournaments yet.</td></tr>{% endfor %}</table></div>
+{{ players_chart|json_script:"d1" }}{{ teams_chart|json_script:"d2" }}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>
+function draw(id,src,type){var d=JSON.parse(document.getElementById(src).textContent);
+new Chart(document.getElementById(id),{type:type,data:{labels:d.labels,datasets:[{data:d.data,backgroundColor:'#e4572e'}]},options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}}})}
+draw('c1','d1','bar');draw('c2','d2','bar');
+</script>{% endblock %}

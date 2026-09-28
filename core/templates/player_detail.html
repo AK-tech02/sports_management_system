@@ -1,0 +1,6 @@
+{% extends 'base.html' %}{% block content %}<div class="top"><h1>{{ p.name }}</h1>{% if can_edit %}<a class="btn" href="{% url 'player_edit' p.pk %}">Edit profile</a>{% endif %}</div>
+<div class="grid"><div class="stat"><b>{{ p.pts }}</b><span>Points</span></div><div class="stat"><b>{{ p.gp }}</b><span>Matches</span></div></div>
+<div class="card"><p><b>Team:</b> {{ p.team|default:"Not assigned" }} &nbsp; <b>Sport:</b> {{ p.sport }} &nbsp; <b>Born:</b> {{ p.date_of_birth|default:"-" }}</p>
+<p><b>Achievements:</b> {{ p.achievements|default:"-" }}</p>
+{% if see_med %}<p><b>Medical record:</b> {{ p.medical_notes|default:"Fit, no notes" }}</p>{% else %}<p class="mu">Medical records are visible to administrators, coaches and the player.</p>{% endif %}</div>
+<div class="card"><h2>Recent performances</h2><table>{% for s in stats %}<tr><td>{{ s.created_at|date:"j M Y" }}</td><td>{{ s.points }} pts</td><td>{{ s.match|default:"-" }}</td><td>{{ s.note }}</td></tr>{% empty %}<tr><td class="mu">No performances recorded yet.</td></tr>{% endfor %}</table></div>{% endblock %}

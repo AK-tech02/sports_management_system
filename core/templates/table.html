@@ -1,0 +1,7 @@
+{% extends 'base.html' %}{% block content %}
+<div class="top"><h1>{{ title }}</h1><div>{% for a in top_actions %}<a class="btn" href="{{ a.url }}">{{ a.label }}</a> {% endfor %}</div></div>
+{% if subtitle %}<p class="mu">{{ subtitle }}</p>{% endif %}
+{% if search %}<form method="get" class="row"><input name="q" value="{{ q }}" placeholder="Search name or sport"><select name="team"><option value="">All teams</option>{% for t in teams %}<option value="{{ t.id }}" {% if t.id|stringformat:"s" == team %}selected{% endif %}>{{ t.name }}</option>{% endfor %}</select><button class="btn ghost">Filter</button></form>{% endif %}
+<div class="card tw"><table><tr>{% for h in head %}<th>{{ h }}</th>{% endfor %}<th></th></tr>
+{% for r in rows %}<tr>{% for c in r.cells %}<td>{% if c.url %}<a href="{{ c.url }}">{{ c.text }}</a>{% else %}{{ c }}{% endif %}</td>{% endfor %}<td class="act">{% for a in r.actions %}<a class="{{ a.cls }}" href="{{ a.url }}">{{ a.label }}</a>{% endfor %}</td></tr>
+{% empty %}<tr><td colspan="{{ head|length|add:1 }}" class="mu">Nothing here yet.</td></tr>{% endfor %}</table></div>{% endblock %}

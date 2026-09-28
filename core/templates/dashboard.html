@@ -1,0 +1,5 @@
+{% extends 'base.html' %}{% block content %}<h1>Dashboard</h1>
+<div class="grid">{% for label,n in counts %}<div class="stat"><b>{{ n }}</b><span>{{ label }}</span></div>{% endfor %}</div>
+<div class="card"><h2>Next matches</h2><div class="tw"><table>{% for m in upcoming %}<tr><td>{{ m.date }}</td><td><a href="{% url 'tournament' m.tournament_id %}">{{ m }}</a></td><td>{{ m.venue|default:"Venue TBA" }}</td></tr>{% empty %}<tr><td class="mu">No matches scheduled.</td></tr>{% endfor %}</table></div></div>
+<div class="card"><h2>Top performers</h2><div class="tw"><table>{% for p in top %}<tr><td><a href="{% url 'player' p.pk %}">{{ p.name }}</a></td><td>{{ p.team|default:"-" }}</td><td>{{ p.pts }} pts</td></tr>{% endfor %}</table></div></div>
+<div class="card"><h2>Latest announcements</h2>{% for n in notes %}<div class="note"><b>{{ n.title }}</b><br>{{ n.message }}<br><small>{{ n.created_at|date:"j M, H:i" }}</small></div>{% empty %}<span class="mu">No announcements.</span>{% endfor %}</div>{% endblock %}
